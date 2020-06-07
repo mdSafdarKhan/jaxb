@@ -1,0 +1,73 @@
+JAXB
+====
+
+	Marshal: Object -> Xml
+
+	Unmarshal: Xml -> Object
+	
+	JAXB ready Object
+	---------------------
+		@XmlRootElement(name = "employee")
+		
+		@XmlAccessorType(XmlAccessType.FIELD)
+		
+		@XmlType(propOrder = { "name", "addreses" })
+		
+		public class Employee implements Serializable {
+			
+			private static final long serialVersionUID = 1L;
+
+			@XmlAttribute
+			private Integer id;
+
+			@XmlElement
+			private String name;
+
+			@XmlElement
+			private List<Address> addreses;
+		
+			//Setters
+			//Getters
+		
+		}
+		
+	Marshaling Code
+	-------------------
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(com.demo.Employee.class);
+			
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			
+			FileOutputStream fos = new FileOutputStream("emp.xml");
+			
+			marshaller.marshal(employee, fos);
+			
+			System.out.println("Marshalling done!");
+			
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	Unmarshaling Code
+	----------------------
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(Employee.class);
+			
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			
+			Employee employee = (Employee)unmarshaller.unmarshal(new FileInputStream("emp.xml"));
+			
+			System.out.println(employee);
+			
+			System.out.println("Unmarshalling done!");
+			
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+

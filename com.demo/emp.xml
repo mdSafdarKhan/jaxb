@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<employee id="100">
+    <name>Peter</name>
+    <addreses>
+        <city>New Delhi</city>
+        <state>Delhi</state>
+        <country>India</country>
+    </addreses>
+    <addreses>
+        <city>Patna</city>
+        <state>Bihar</state>
+        <country>India</country>
+    </addreses>
+</employee>
